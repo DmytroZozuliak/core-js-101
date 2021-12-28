@@ -19,9 +19,19 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+  // eslint-disable-next-line func-names
+  this.getArea = function () {
+    return this.width * this.height;
+  };
+  // throw new Error('Not implemented');
 }
+// let gg = new Rectangle(10, 20);
+// console.log(gg.width);
+// console.log(gg.height);
+// console.log(gg.getArea());
 
 /**
  * Returns the JSON representation of specified object
@@ -33,8 +43,9 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
+  // throw new Error('Not implemented');
 }
 
 /**

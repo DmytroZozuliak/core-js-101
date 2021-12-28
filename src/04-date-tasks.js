@@ -18,9 +18,12 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromRfc2822(value) {
+  return new Date(value);
+  // throw new Error('Not implemented');
 }
+
+// console.log(parseDataFromRfc2822('December 17, 1995 03:24:00'));
 
 /**
  * Parses an ISO 8601 string date representation into date value
@@ -33,8 +36,10 @@ function parseDataFromRfc2822(/* value */) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromIso8601(value) {
+  return new Date(value);
+
+  // throw new Error('Not implemented');
 }
 
 /**
@@ -51,8 +56,14 @@ function parseDataFromIso8601(/* value */) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  const year = date.getFullYear();
+  if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+    return true;
+  }
+  return false;
+
+  // throw new Error('Not implemented');
 }
 
 /**
@@ -70,9 +81,37 @@ function isLeapYear(/* date */) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(/* startDate, endDate */) {
-  throw new Error('Not implemented');
+function timeSpanToString(startDate, endDate) {
+  /*   const time1 = startDate.getTime();
+  const time2 = endDate.getTime();
+  const dif = time2 - time1;
+  let result = '';
+  let ms = dif;
+  let s = dif / 1000;
+  let mins = s / 60;
+  let hours = mins / 60; */
+
+  const time1 = startDate.getTime();
+  const time2 = endDate.getTime();
+  let dif = time2 - time1;
+  dif /= 1000;
+  let sec = (dif % 60).toFixed(3);
+  if (sec < 10) sec = `0${sec}`;
+  dif /= 60;
+  let min = Math.floor(dif % 60);
+  if (min < 10) min = `0${min}`;
+  dif /= 60;
+  let hours = Math.floor(dif % 24);
+  if (hours < 10) hours = `0${hours}`;
+  return `${hours}:${min}:${sec}`;
+  // throw new Error('Not implemented');
 }
+// console.log(
+//   timeSpanToString(
+//     new Date(2000, 1, 1, 10, 0, 0),
+//     new Date(2000, 1, 1, 11, 0, 0)
+//   )
+// );
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock
