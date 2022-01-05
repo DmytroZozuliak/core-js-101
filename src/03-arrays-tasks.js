@@ -243,11 +243,13 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  // todo
-
+function getMovingSum(arr) {
+  let sum = 0;
+  return arr.map((item) => {
+    sum += item;
+    return sum;
+  });
   // return arr.reduce((acc, el) => {
-  // eslint-disable-next-line no-param-reassign
   //   acc = el + acc;
   //   return acc;
   // }, []);
@@ -259,7 +261,7 @@ function getMovingSum(/* arr */) {
     }
     f[n] = f[n-1] + x[n]
   }) */
-  throw new Error('Not implemented');
+  // throw new Error('Not implemented');
 }
 
 /**
@@ -508,10 +510,22 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  // todo
+function getIdentityMatrix(n) {
+  const array = Array(n).fill([...Array(n).fill(null)]);
 
-  throw new Error('Not implemented');
+  // eslint-disable-next-line arrow-body-style
+  return array.map((raw, indexRaw) => {
+    return raw.map((el, indexEl) => {
+      let element = el;
+      if (indexEl === indexRaw) {
+        element = 1;
+      } else {
+        element = 0;
+      }
+      return element;
+    });
+  });
+  // throw new Error('Not implemented');
 }
 
 /**
