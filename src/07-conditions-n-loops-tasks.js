@@ -495,9 +495,31 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const parts = pathes.map((item) => item.split('/'));
+  const res = [];
+
+  // console.log(parts);
+  for (let i = 0; i < parts[0].length; i += 1) {
+    // console.log(parts[0]);
+    const currentPart = parts[0][i];
+
+    if (parts.every((item) => item[i] === currentPart)) {
+      res.push(parts[0][i]);
+    }
+  }
+  // console.log(res);
+  let joined;
+  if (res.length) {
+    joined = `${res.join('/')}/`;
+  } else {
+    joined = '';
+  }
+  // console.log(joined);
+  return joined;
+  // throw new Error('Not implemented');
 }
+// console.log(getCommonDirectoryPath(['/web/1.png', '/web/2.png']));
 
 /**
  * Returns the product of two specified matrixes.
@@ -517,8 +539,23 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(A, B) {
+  const rowsA = A.length;
+  const colsA = A[0].length;
+  const rowsB = B.length;
+  const colsB = B[0].length;
+  const C = [];
+  if (colsA !== rowsB) return false;
+  for (let i = 0; i < rowsA; i += 1) C[i] = [];
+  for (let k = 0; k < colsB; k += 1) {
+    for (let i = 0; i < rowsA; i += 1) {
+      let t = 0;
+      for (let j = 0; j < rowsB; j += 1) t += A[i][j] * B[j][k];
+      C[i][k] = t;
+    }
+  }
+  return C;
+  // throw new Error('Not implemented');
 }
 
 /**
